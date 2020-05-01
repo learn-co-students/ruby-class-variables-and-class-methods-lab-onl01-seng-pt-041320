@@ -1,6 +1,5 @@
 class Song
     attr_accessor :name, :artist, :genre
-    attr_reader :new_hash
     
     @@count = 0
     @@genres = []
