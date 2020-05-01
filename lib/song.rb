@@ -1,77 +1,53 @@
-(1..5).each_with_object(2) { |value, memo| memo *= value} return memo
 
+class Song
+  attr_accessor :name, :artist, :genre
 
-class Song 
   @@count = 0
-  
-  def self.count 
-    @@count
-  end 
-  
-  # Control for duplicates when you code your 
-  # .genres class method, not when you add 
-  # genres to the original @@genres array.
   @@genres = []
-  
-# this should be deleted at some point
-# def self.total_genre_entries
-#   @@genres
-# end
-  
-  def self.genres
-    @@genres.uniq
+  @@artists = []
+
+  def initialize(song_name, artist, genre)
+    @name = song_name
+    @artist = artist
+    @genre = genre
+    @@count += 1
+    @@genres << genre
+    @@artists << artist
   end
-  
-  # this method is the one I found on stackexchange...
-  def self.genre_count
-    @@genres.inject(Hash.new(0)) { |total, i| total[i] += 1 ;total}
-  end 
-  
-  # This is how the method is done on learn.co:
+
+  def self.count
+    @@count
+  end
+
+  def self.genres
+    @@genres.uniq!
+  end
+
+  def self.artists
+    @@artists.uniq!
+  end
+
   def self.genre_count
     genre_count = {}
     @@genres.each do |genre|
-      if genre_count[genre]
-        genre_count[genre] += 1 
-      else
+      if genre_count[genre] #if the genre is already in the hash
+        genre_count[genre] += 1
+      else #if it's a new genre
         genre_count[genre] = 1
       end
     end
     genre_count
   end
-  
-  @@artists = []
-  
+
   def self.artist_count
-    @@artists.inject(Hash.new(0)) { |total, i| total[i] += 1 ;total}
+    artist_count = {}
+    @@artists.each do |artist|
+      if artist_count[artist] #if the artist is already in the hash
+        artist_count[artist] += 1
+      else
+        artist_count[artist] = 1
+      end
+    end
+    artist_count
   end
-  
-  def self.artists
-    @@artists.uniq
-  end
-  
-  def initialize(name, artist, genre)
-    @name = name
-    @artist = artist
-    @@artists << artist
-    @genre = genre
-    @@genres << genre
-    @@count += 1
-  end
-  attr_accessor :name, :artist, :genre
-end 
-
-the_day = Song.new("The Day", "John Smith", "classic")
-tomorow = Song.new("Tomorow", "John Smith", "classic")
-a_yearz = Song.new("A Yearz", "Adam Johns", "oldtime")
-a_rabess = Song.new("Arabess", "Habibi Watan", "Rai")
-cus_umak = Song.new("Cus Ummach", "Haifa Wehbe", "Rai")
-
-# puts the_day.name
-# puts the_day.artist
-# puts the_day.genre
-# puts Song.count
-# Song.genres
-# Song.artists
-Song.genre_count
-# Song.artist_count
+end
