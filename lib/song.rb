@@ -13,9 +13,6 @@ class Song
         @@count += 1
 
     end
-    # def initialize
-    #     @@count += 1
-    # end
     
     def self.count
         @@count
@@ -27,7 +24,6 @@ class Song
 
     def self.genres
         @@genres
-        binding.pry
-    end
+÷    end
 
 end
