@@ -1,31 +1,80 @@
 class Song 
-  attr_accessor :name, :artist_name
-  @@all = []
-  
-  def self.create
-    song = self.new 
-    @@all << song 
-    song 
+  def initialize(name, artist, genre)
+    @name = name 
+    @artist = artist 
+    @genre = genre 
+    @@count += 1 
+    @@artists << artist
+    @@genres << genre
   end 
   
-  def self.all 
-    @@all 
+  def name=(name)
+    @name = name
+  end
+ 
+  def name
+    @name
   end
   
-  def save 
-    self.class.all << self 
+  def artist=(artist)
+    @artist = artist
+  end
+ 
+  def artist
+    @artist
+  end
+  
+  def genre=(genre)
+    @genre = genre
+  end
+ 
+  def genre
+    @genre
+  end
+  
+  @@count = 0
+  
+  def self.count 
+    @@count 
   end 
   
-  def self.new_by_name(song_name)
-    song = self.new
-    song.name = song_name 
-    song 
+  @@artists = []
+  
+ def self.artists
+   @@artists.uniq
+ end
+  
+   
+  @@genres = []
+  
+  def self.genres
+    @@genres.uniq
   end 
   
-  def self.create_by_name(song_name)
-    song_name = self.create
-    @@all << song_name 
-    
+  def self.genre_count
+    genre_count = {}
+      @@genres.each do |genre|
+    if !genre_count[genre]
+      genre_count[genre] = 1 
+    else 
+      genre_count[genre] += 1 
+    end 
+  end
+  genre_count
   end 
   
-end 
+
+  def self.artist_count
+    artist_count = {}
+      @@artists.each do |artist|
+    if !artist_count[artist]
+      artist_count[artist] = 1 
+    else 
+      artist_count[artist] += 1 
+    end
+  end
+  artist_count
+  end
+  
+
+end
